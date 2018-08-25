@@ -6,6 +6,9 @@ import logger from 'morgan';
 import mongoose from 'mongoose';
 import { getSecret } from './secrets';
 
+import User from './models/user';
+import Book from './models/book';
+
 // creating instances
 const app = express();
 const router = express.Router();
@@ -13,7 +16,8 @@ const router = express.Router();
 const API_PORT = process.env.API_PORT || 3001;
 
 // db configuration, setting URI from mLab
-mongoose.connect(getSecret('dbUri'));
+
+mongoose.connect(getSecret('dbUri'), { useNewUrlParser: true });
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
@@ -25,6 +29,30 @@ app.use(logger('dev'));
 // set the route and initialize the API
 router.get('/', (req, res) => {
   res.json({ message: 'Hello, World!' });
+});
+
+router.get('/book', (req, res) => {
+  Book.find((err, book) => {
+    if (err) return res.json({ success: false, error: err});
+    return res.json({ success: true, data: book });
+  });
+});
+
+router.post('/book', (req, res) => {
+  const book = new Book();
+  const { id } = req.body;
+  console.log('body: ', req.body);
+  if (!id){ // TODO: update with more fields
+    return res.json({
+      success: false,
+      error: 'No book id was provided.'
+    });
+  }
+  book.id = id;
+  book.save(err => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
 });
 
 // use the router configuration when we call /api
