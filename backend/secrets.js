@@ -1,7 +1,8 @@
 
 // secrets.js
 const secrets = {
-  dbUri: process.env.DB_URI
+  dbUri: process.env.DB_URI,
+  secret: process.env.JWT_SECRET,
 };
 
-export const getSecret = key => secrets[key];
+export const getSecrets = key => secrets[key];

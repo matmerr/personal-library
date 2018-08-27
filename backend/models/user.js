@@ -1,5 +1,5 @@
 
-import mongoose from 'mongoose';
+/* import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 // create new instance of mongoose.schema
@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
   name: String,
+  books: Array,
 }, { timestamps: true});
 
-export default mongoose.model('User', UserSchema);
+export default mongoose.model('User', UserSchema); */
