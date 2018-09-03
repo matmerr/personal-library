@@ -9,6 +9,8 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@material-ui/core": "^3.0.0",
+    "@material-ui/icons": "^3.0.0",
     "config": "^2.0.1",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

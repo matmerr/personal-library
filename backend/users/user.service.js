@@ -12,7 +12,9 @@ module.exports = {
   getById,
   create,
   update,
-  delete: _delete
+  delete: _delete,
+
+  addBook,
 };
 
 async function authenticate({ username, password }) {
@@ -71,6 +73,18 @@ async function update(id, userParam){
 
   await user.save();
 
+}
+
+async function addBook(bookID, userID){
+  const user = await User.findById(id);
+
+  // validate
+  if (!user) throw 'User not found.';
+
+  // copy userParam properties to user
+  Object.assign(user, bookID);
+
+  await user.save();
 }
 
 async function _delete(id){

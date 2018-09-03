@@ -12,7 +12,7 @@ export const userService = {
   register,
   getAll,
   getById,
-  update,
+  // update,
   delete: _delete
 };
 
@@ -68,7 +68,7 @@ function register(user) {
   return fetch(`${apiUrl}/users/register`, requestOptions).then(handleResponse);
 }
 
-function update(user) {
+/* function update(user) {
   const requestOptions = {
       method: 'PUT',
       headers: { ...authHeader(), 'Content-Type': 'application/json' },
@@ -76,7 +76,7 @@ function update(user) {
   };
 
   return fetch(`${apiUrl}/users/${user.id}`, requestOptions).then(handleResponse);;
-}
+} */
 
 function _delete(id) {
   const requestOptions = {

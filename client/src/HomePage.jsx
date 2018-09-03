@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
- 
 import { userActions } from './actions/user.actions';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import AddIcon from '@material-ui/icons/Add';
+
+const styles = {};
  
 class HomePage extends React.Component {
     componentDidMount() {
@@ -16,9 +19,14 @@ class HomePage extends React.Component {
     render() {
         const { user, users } = this.props;
         return (
-            <div className="col-md-6 col-md-offset-3">
+            <div>
                 <h1>Hi {user.firstName}!</h1>
-                <p>You're logged in with React!!</p>
+                <Button href="/addBook" variant="fab" color="primary">
+                    <AddIcon />
+                </Button>
+
+
+
                 <h3>All registered users:</h3>
                 {users.loading && <em>Loading users...</em>}
                 {users.items &&
@@ -36,7 +44,7 @@ class HomePage extends React.Component {
                     </ul>
                 }
                 <p>
-                    <Link to="/login">Logout</Link>
+                    <Button href="/login">Logout</Button>
                 </p>
             </div>
         );
@@ -52,5 +60,5 @@ function mapStateToProps(state) {
     };
 }
  
-const connectedHomePage = connect(mapStateToProps)(HomePage);
+const connectedHomePage = connect(mapStateToProps)(withStyles(styles)(HomePage));
 export { connectedHomePage as HomePage };
