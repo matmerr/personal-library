@@ -76,7 +76,7 @@ async function update(id, userParam){
 }
 
 async function addBook(bookID, userID){
-  const user = await User.findById(id);
+  const user = await User.findById(userID);
 
   // validate
   if (!user) throw 'User not found.';

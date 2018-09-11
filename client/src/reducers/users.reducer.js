@@ -1,6 +1,6 @@
 
 // manages the users
-import { userConstants } from '../constants/user.constants';
+import { userConstants } from '../actions/user.actions';
  
 export function users(state = {}, action) {
   switch (action.type) {

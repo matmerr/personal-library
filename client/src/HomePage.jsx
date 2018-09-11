@@ -4,8 +4,17 @@ import { userActions } from './actions/user.actions';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
+import MenuAppBar from './MenuAppBar';
 
-const styles = {};
+const styles = {
+    addBook: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+    addLabel: {
+        paddingLeft: 5,
+    }
+};
  
 class HomePage extends React.Component {
     componentDidMount() {
@@ -17,13 +26,22 @@ class HomePage extends React.Component {
     }
  
     render() {
-        const { user, users } = this.props;
+        const { classes, user, users } = this.props;
         return (
             <div>
-                <h1>Hi {user.firstName}!</h1>
-                <Button href="/addBook" variant="fab" color="primary">
+                <MenuAppBar />
+                <h1>Welcome {user.firstName}!</h1>
+                <div className={classes.addBook}>
+                <Button
+                    mini
+                    href="/addBook"
+                    variant="fab"
+                    color="primary"
+                >
                     <AddIcon />
                 </Button>
+                <h1 className={classes.addLabel}>Add a Book</h1>
+                </div>
 
 
 
@@ -43,9 +61,6 @@ class HomePage extends React.Component {
                         )}
                     </ul>
                 }
-                <p>
-                    <Button href="/login">Logout</Button>
-                </p>
             </div>
         );
     }

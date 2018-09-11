@@ -7,10 +7,12 @@ import { LoginPage } from './LoginPage';
 import { RegisterPage } from './RegisterPage';
 import { AddBookPage } from './AddBookPage';
 import Container from './Container';
+import { MuiThemeProvider } from '@material-ui/core/styles';
+import ApplicationTheme from './theme';
 
 export function App() {
     return (
-        <div>
+        <MuiThemeProvider theme={ApplicationTheme}>
             <Router history={history}>
                     <Container>
                         <PrivateRoute exact path="/" component={HomePage} />
@@ -19,6 +21,6 @@ export function App() {
                         <Route path="/addBook" component={AddBookPage} />
                     </Container>
             </Router>
-        </div>
+        </MuiThemeProvider>
     );
 }

@@ -8,9 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
-const styles = theme => ({
+const styles = {
   card: {
     display: 'flex',
+    marginTop: 10,
+    justifyContent: 'space-between',
+    height: 200,
+    alignItems: 'center',
   },
   details: {
     display: 'flex',
@@ -22,14 +26,15 @@ const styles = theme => ({
   cover: {
     width: 151,
     height: 151,
+    backgroundSize: 'contain',
   },
   addIcon: {
     paddingTop: 10,
   },
-});
+};
 
 function BookCard(props) {
-  const { classes, image, title, author } = props;
+  const { classes,id, onClick, image, title, authors } = props;
 
   return (
     <Card className={classes.card}>
@@ -37,10 +42,15 @@ function BookCard(props) {
         <CardContent className={classes.content}>
           <Typography variant="headline">{title}</Typography>
           <Typography variant="subheading" color="textSecondary">
-            {author}
+            {authors}
           </Typography>
           <div className={classes.addIcon}>
-            <Button mini variant="fab" color="primary">
+            <Button
+              mini
+              variant="fab"
+              color="primary"
+              onClick={() => onClick(id)}
+            >
                 <AddIcon />
             </Button>
           </div>

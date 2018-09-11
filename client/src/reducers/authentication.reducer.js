@@ -1,7 +1,7 @@
 
 // manages the state related to the login/logout actions
 
-import { userConstants } from '../constants/user.constants';
+import { userConstants } from '../actions/user.actions';
 
 let user = JSON.parse(localStorage.getItem('user'));
 const initialState = user ? { loggedIn: true, user } : {};
@@ -22,6 +22,10 @@ export function authentication(state = initialState, action){
       return {};
     case userConstants.LOGOUT:
       return {};
+    case userConstants.UPDATE:
+      return {
+        user: action.user
+      };
     default:
       return state
   }

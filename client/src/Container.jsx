@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
   root: {
     margin: 'auto',
-    maxWidth: '40%',
+    //maxWidth: '60%',
   },
 };
 
@@ -21,7 +21,7 @@ function Container (props){
 
 Container.propTypes = {
   classes: PropTypes.object.isRequired,
-  children: PropTypes.object.isRequired,
+  children: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default withStyles(styles)(Container);

@@ -1,7 +1,8 @@
 
 // manages the books
-import { booksConstants } from '../constants/books.constants';
- 
+import { booksConstants } from '../actions/books.actions';
+
+let user = JSON.parse(localStorage.getItem('user'));
 
 export function books(state = {}, action) {
   switch (action.type) {
@@ -12,9 +13,9 @@ export function books(state = {}, action) {
     case booksConstants.SEARCH_FAILURE:
       return {};
     case booksConstants.ADD_BOOK:
-      return {};
+      return { addingBook: true };
     case booksConstants.ADD_SUCCESS:
-      return {};
+      return { };
     case booksConstants.ADD_FAILURE:
       return {};
     case booksConstants.LOAD_BOOKS:
