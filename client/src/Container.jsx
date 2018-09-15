@@ -5,18 +5,18 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
   root: {
     margin: 'auto',
-    //maxWidth: '60%',
+    // maxWidth: '60%',
   },
 };
 
-function Container (props){
+function Container(props) {
   const { classes, children } = props;
-  
-  return(
+
+  return (
     <div className={classes.root}>
-    {children}
+      {children}
     </div>
-  )
+  );
 }
 
 Container.propTypes = {

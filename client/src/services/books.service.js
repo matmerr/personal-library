@@ -11,48 +11,11 @@ export const booksService = {
   addBook,
 };
 
-function search(searchTerm){
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-
-  return fetch(`${googleAPI}/v1/volumes?q=${searchTerm}&key=${keyAPI}`, requestOptions)
-    .then(handleResponse)
-    .then(books => {
-      // login successful
-      localStorage.setItem('searchDisplay', JSON.stringify(books));
-      return books;
-    });
-}
-/* 
- function addBook(book, user){
-  const requestOptions = {
-    method: 'PUT',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify(user)
-};
-
-  return fetch(`${apiUrl}/users/${user._id}/addBook`, requestOptions)
-  .then(handleResponse);
-
-} */
-
-function addBook(user) {
-  const requestOptions = {
-      method: 'PUT',
-      headers: { ...authHeader(), 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
-  };
-
-  return fetch(`${apiUrl}/users/${user._id}`, requestOptions).then(handleResponse);;
-}
-
-function handleResponse(response){
-  return response.text().then(text => {
+function handleResponse(response) {
+  return response.text().then((text) => {
     const data = text && JSON.parse(text);
-    if (!response.ok){
-      if (response.status === 401){
+    if (!response.ok) {
+      if (response.status === 401) {
         // TODO: handle 401
         console.log('401 error');
       }
@@ -61,4 +24,29 @@ function handleResponse(response){
     }
     return data;
   });
+}
+
+function search(searchTerm) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  return fetch(`${googleAPI}/v1/volumes?q=${searchTerm}&key=${keyAPI}`, requestOptions)
+    .then(handleResponse)
+    .then((books) => {
+      // login successful
+      localStorage.setItem('searchDisplay', JSON.stringify(books));
+      return books;
+    });
+}
+
+function addBook(user) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { ...authHeader(), 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
+  };
+
+  return fetch(`${apiUrl}/users/${user._id}`, requestOptions).then(handleResponse);
 }

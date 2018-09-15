@@ -34,7 +34,14 @@ const styles = {
 };
 
 function BookCard(props) {
-  const { classes,id, onClick, image, title, authors } = props;
+  const {
+    classes,
+    id,
+    onClick,
+    image,
+    title,
+    authors,
+  } = props;
 
   return (
     <Card className={classes.card}>
@@ -51,7 +58,7 @@ function BookCard(props) {
               color="primary"
               onClick={() => onClick(id)}
             >
-                <AddIcon />
+              <AddIcon />
             </Button>
           </div>
         </CardContent>

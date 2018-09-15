@@ -11,19 +11,19 @@ export const userService = {
   getAll,
   getById,
   // update,
-  delete: _delete
+  delete: _delete,
 };
 
-function login(username, password){
+function login(username, password) {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password })
+    body: JSON.stringify({ username, password }),
   };
 
   return fetch(`${apiUrl}/users/authenticate`, requestOptions)
     .then(handleResponse)
-    .then(user => {
+    .then((user) => {
       // login successful if jwt token in response
       if (user.token) {
         // store user details and jwt token in local storage to keep user logged in
@@ -34,33 +34,32 @@ function login(username, password){
 }
 
 // remove user from local storage to log the user out
-function logout(){
+function logout() {
   localStorage.removeItem('user');
 }
 
-function getAll(){
+function getAll() {
   const requestOptions = {
     method: 'GET',
-    headers: authHeader()
+    headers: authHeader(),
   };
 
   return fetch(`${apiUrl}/users`, requestOptions).then(handleResponse);
 }
 
-function getById(id){
+function getById(id) {
   const requestOptions = {
     method: 'GET',
-    headers: authHeader()
+    headers: authHeader(),
   };
   return fetch(`${apiUrl}/users/${id}`, requestOptions).then(handleResponse);
-
 }
 
 function register(user) {
   const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(user)
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(user),
   };
 
   return fetch(`${apiUrl}/users/register`, requestOptions).then(handleResponse);
@@ -78,18 +77,18 @@ function register(user) {
 
 function _delete(id) {
   const requestOptions = {
-      method: 'DELETE',
-      headers: authHeader()
+    method: 'DELETE',
+    headers: authHeader(),
   };
 
   return fetch(`${apiUrl}/users/${id}`, requestOptions).then(handleResponse);
 }
 
-function handleResponse(response){
-  return response.text().then(text => {
+function handleResponse(response) {
+  return response.text().then((text) => {
     const data = text && JSON.parse(text);
-    if (!response.ok){
-      if (response.status === 401){
+    if (!response.ok) {
+      if (response.status === 401) {
         logout();
       }
       const error = (data && data.message) || response.statusText;

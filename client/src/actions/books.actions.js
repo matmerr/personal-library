@@ -1,6 +1,7 @@
 import { booksService } from '../services/books.service';
 import { history } from '../helpers/history';
 
+// Book action types
 export const booksConstants = {
   SEARCH_REQUEST: 'BOOKS_SEARCH_REQUEST',
   SEARCH_SUCCESS: 'BOOKS_SEARCH_SUCCESS',
