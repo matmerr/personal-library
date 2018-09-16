@@ -67,7 +67,12 @@ function update(user) {
     body: JSON.stringify(user),
   };
 
-  return fetch(`${apiUrl}/users/${user._id}`, requestOptions).then(handleResponse);
+  return fetch(`${apiUrl}/users/${user._id}`, requestOptions)
+    .then(handleResponse)
+    .then(() => {
+      // update the user when successful
+      localStorage.setItem('user', JSON.stringify(user));
+    });
 }
 
 function _delete(id) {

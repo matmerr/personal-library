@@ -41,9 +41,8 @@ class AddBookPage extends React.Component {
 
   handleAddBook(bookID) {
     const { dispatch, user } = this.props;
-    console.log('current user: ', user);
     if (bookID) {
-      const updatedUser = { ...user, books: [bookID] };
+      const updatedUser = { ...user, books: [...user.books, bookID] };
       dispatch(userActions.addBook(updatedUser));
     }
   }
@@ -82,7 +81,7 @@ class AddBookPage extends React.Component {
             onClick={this.handleAddBook}
             title={book.volumeInfo.title}
             authors={book.volumeInfo.authors}
-            image={book.volumeInfo.imageLinks.smallThumbnail}
+            image={book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail}
           />
         ))}
 
@@ -101,7 +100,6 @@ AddBookPage.propTypes = {
 
 function mapStateToProps(state) {
   const { user } = state.authentication;
-  console.log('in component: ', user);
   const { searching, items } = state.books;
   return {
     searching,
@@ -115,5 +113,4 @@ const connectedAddBookPage = connect(
   null,
 )(withStyles(styles)(AddBookPage));
 
-// const connectedAddBookPage = connect(mapStateToProps)(withStyles(styles)(AddBookPage));
 export { connectedAddBookPage as AddBookPage };

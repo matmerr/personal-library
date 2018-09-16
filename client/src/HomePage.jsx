@@ -1,11 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import { userActions } from './actions/user.actions';
 import MenuAppBar from './MenuAppBar';
-// import BookCard from './BookCard';
 
 const styles = {
   addBook: {
@@ -23,22 +23,15 @@ function Library(props) {
     <div>
       {(books.length === 1) ? (
         <div>{books}</div>
-      ) : (
-        <div>here</div>
-      /*         books.items.map((book, i) =>
-            <BookCard
-                key={i}
-                id={book.id}
-                onClick={this.handleAddBook}
-                title={book.volumeInfo.title}
-                authors={book.volumeInfo.authors}
-                image={book.volumeInfo.imageLinks.smallThumbnail}
-            />
-        ) */
-      )}
+      ) : (books.map(book => (<div>{book}</div>)))
+      }
     </div>
   );
 }
+
+Library.propTypes = {
+  books: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 class HomePage extends React.Component {
   componentDidMount() {
@@ -52,7 +45,7 @@ class HomePage extends React.Component {
   }
 
   render() {
-    const { classes, user, users } = this.props;
+    const { classes, user } = this.props;
 
     return (
       <div>
@@ -69,7 +62,6 @@ class HomePage extends React.Component {
           </Button>
           <h1 className={classes.addLabel}>Add a Book</h1>
         </div>
-
         {user.books && <Library books={user.books} />}
       </div>
     );
@@ -77,11 +69,10 @@ class HomePage extends React.Component {
 }
 
 function mapStateToProps(state) {
-  const { users, authentication } = state;
+  const { authentication } = state;
   const { user } = authentication;
   return {
     user,
-    users,
   };
 }
 
