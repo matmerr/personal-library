@@ -42,7 +42,6 @@ class AddBookPage extends React.Component {
     if (bookID) {
       const updatedUser = { ...user, books: [bookID] };
       dispatch(bookActions.addBook(updatedUser));
-      dispatch();
     }
   }
 

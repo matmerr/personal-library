@@ -2,9 +2,7 @@
 // manages the books
 import { booksConstants } from '../actions/books.actions';
 
-let user = JSON.parse(localStorage.getItem('user'));
-
-export function books(state = {}, action) {
+export default function books(state = {}, action) {
   switch (action.type) {
     case booksConstants.SEARCH_REQUEST:
       return { searching: true };

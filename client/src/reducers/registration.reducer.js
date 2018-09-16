@@ -3,7 +3,7 @@
 
 import { userConstants } from '../actions/user.actions';
 
-export function registration(state = {}, action){
+export default function registration(state = {}, action){
   switch (action.type) {
     case userConstants.REGISTER_REQUEST:
       return { registering: true };

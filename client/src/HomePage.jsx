@@ -19,7 +19,6 @@ const styles = {
 
 function Library(props) {
   const { books } = props;
-  console.log('books: ', books.length);
   return (
     <div>
       {(books.length === 1) ? (

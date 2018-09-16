@@ -2,7 +2,7 @@
 // manages the users
 import { userConstants } from '../actions/user.actions';
  
-export function users(state = {}, action) {
+export default function users(state = {}, action) {
   switch (action.type) {
     case userConstants.GETALL_REQUEST:
       return {
