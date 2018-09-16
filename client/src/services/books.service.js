@@ -27,7 +27,6 @@ function search(searchTerm) {
   return fetch(`${googleAPI}/v1/volumes?q=${searchTerm}&key=${keyAPI}`, requestOptions)
     .then(handleResponse)
     .then((books) => {
-      // login successful
       //localStorage.setItem('books.books', JSON.stringify(books));
       return books.items;
     });

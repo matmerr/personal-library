@@ -74,18 +74,15 @@ function addBook(user) {
   function failure(error) { return { type: userConstants.ADD_BOOK_FAILURE, error }; }
 
   return (dispatch) => {
-    console.log('working with: ', user);
     dispatch(request(user));
     userService.update(user)
-      .then(
-        (user) => {
-          dispatch(success(user));
-          history.push('/');
-        },
-        (error) => {
-          dispatch(failure(error.toString()));
-        },
-      );
+      .then(() => {
+        dispatch(success(user));
+        history.push('/');
+      },
+      (error) => {
+        dispatch(failure(error.toString()));
+      });
   };
 }
 

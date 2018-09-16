@@ -27,7 +27,8 @@ export default function authentication(state = initialState, action) {
         user: action.user,
       };
     case userConstants.ADD_BOOK:
-      return { };
+      console.log('reducer: ', action);
+      return { user: action.user };
     case userConstants.ADD_BOOK_SUCCESS:
       return { user: action.user };
     case userConstants.ADD_BOOK_FAILURE:

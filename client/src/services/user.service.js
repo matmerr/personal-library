@@ -61,21 +61,13 @@ function register(user) {
 }
 
 function update(user) {
-
-  console.log("user: ", user);
   const requestOptions = {
     method: 'PUT',
     headers: { ...authHeader(), 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   };
 
-  return fetch(`${apiUrl}/users/${user._id}`, requestOptions)
-    .then(handleResponse)
-    .then((user) => {
-    // adding books is successful
-      localStorage.setItem('user', JSON.stringify(user));
-      //return user;
-    });
+  return fetch(`${apiUrl}/users/${user._id}`, requestOptions).then(handleResponse);
 }
 
 function _delete(id) {
