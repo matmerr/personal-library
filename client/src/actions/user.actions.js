@@ -13,40 +13,33 @@ export const userConstants = {
   LOGOUT: 'USERS_LOGOUT',
   UPDATE: 'USERS_UPDATE',
 
-  GETALL_REQUEST: 'USERS_GETALL_REQUEST',
-  GETALL_SUCCESS: 'USERS_GETALL_SUCCESS',
-  GETALL_FAILURE: 'USERS_GETALL_FAILURE',
-
   DELETE_REQUEST: 'USERS_DELETE_REQUEST',
   DELETE_SUCCESS: 'USERS_DELETE_SUCCESS',
-  DELETE_FAILURE: 'USERS_DELETE_FAILURE'   
+  DELETE_FAILURE: 'USERS_DELETE_FAILURE',
+
+  ADD_BOOK: 'USERS_ADD_BOOK',
+  ADD_BOOK_SUCCESS: 'USERS_ADD_BOOK_SUCCESS',
+  ADD_BOOK_FAILURE: 'USERS_ADD_BOOK_FAILURE',
 };
 
-export const userActions = {
-  login,
-  logout,
-  register,
-  getAll,
-  delete: _delete
-};
+function login(username, password) {
+  function request(user) { return { type: userConstants.LOGIN_REQUEST, user }; }
+  function success(user) { return { type: userConstants.LOGIN_SUCCESS, user }; }
+  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error }; }
 
-function login(username, password){
-  return dispatch => {
+  return (dispatch) => {
     dispatch(request({ username }));
     userService.login(username, password)
       .then(
-        user => {
+        (user) => {
           dispatch(success(user));
           history.push('/');
         },
-        error => {
+        (error) => {
           dispatch(failure(error.toString()));
-        }
+        },
       );
   };
-  function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-  function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
-  function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 
 function logout() {
@@ -55,54 +48,67 @@ function logout() {
 }
 
 function register(user) {
-  return dispatch => {
-      dispatch(request(user));
+  function request(user) { return { type: userConstants.REGISTER_REQUEST, user }; }
+  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user }; }
+  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error }; }
 
-      userService.register(user)
-          .then(
-              user => { 
-                  dispatch(success());
-                  history.push('/login');
-              },
-              error => {
-                  dispatch(failure(error.toString()));
-              }
-          );
+  return (dispatch) => {
+    dispatch(request(user));
+
+    userService.register(user)
+      .then(
+        (user) => {
+          dispatch(success());
+          history.push('/login');
+        },
+        (error) => {
+          dispatch(failure(error.toString()));
+        },
+      );
   };
-
-  function request(user) { return { type: userConstants.REGISTER_REQUEST, user } }
-  function success(user) { return { type: userConstants.REGISTER_SUCCESS, user } }
-  function failure(error) { return { type: userConstants.REGISTER_FAILURE, error } }
 }
 
-function getAll() {
-  return dispatch => {
-      dispatch(request());
+function addBook(user) {
+  function request(user) { return { type: userConstants.ADD_BOOK, user }; }
+  function success(user) { return { type: userConstants.ADD_BOOK_SUCCESS, user }; }
+  function failure(error) { return { type: userConstants.ADD_BOOK_FAILURE, error }; }
 
-      userService.getAll()
-          .then(
-              users => dispatch(success(users)),
-              error => dispatch(failure(error.toString()))
-          );
+  return (dispatch) => {
+    console.log('working with: ', user);
+    dispatch(request(user));
+    userService.update(user)
+      .then(
+        (user) => {
+          dispatch(success(user));
+          history.push('/');
+        },
+        (error) => {
+          dispatch(failure(error.toString()));
+        },
+      );
   };
-
-  function request() { return { type: userConstants.GETALL_REQUEST } }
-  function success(users) { return { type: userConstants.GETALL_SUCCESS, users } }
-  function failure(error) { return { type: userConstants.GETALL_FAILURE, error } }
 }
 
-function _delete(id) {
-  return dispatch => {
-      dispatch(request(id));
+function _delete(id) { // eslint-disable-line no-underscore-dangle
+  function request(id) { return { type: userConstants.DELETE_REQUEST, id }; }
+  function success(id) { return { type: userConstants.DELETE_SUCCESS, id }; }
+  function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error }; }
 
-      userService.delete(id)
-          .then(
-              user => dispatch(success(id)),
-              error => dispatch(failure(id, error.toString()))
-          );
+  return (dispatch) => {
+    dispatch(request(id));
+
+    userService.delete(id)
+      .then(
+        user => dispatch(success(id)),
+        error => dispatch(failure(id, error.toString())),
+      );
   };
-
-  function request(id) { return { type: userConstants.DELETE_REQUEST, id } }
-  function success(id) { return { type: userConstants.DELETE_SUCCESS, id } }
-  function failure(id, error) { return { type: userConstants.DELETE_FAILURE, id, error } }
 }
+
+export const userActions = {
+  addBook,
+  login,
+  logout,
+  register,
+  delete: _delete,
+};

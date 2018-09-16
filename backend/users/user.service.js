@@ -8,7 +8,6 @@ const User = db.User;
 
 module.exports = {
   authenticate,
-  getAll,
   getById,
   create,
   update,
@@ -27,10 +26,6 @@ async function authenticate({ username, password }) {
       token
     };
   }
-}
-
-async function getAll(){
-  return await User.find().select('-hash');
 }
 
 async function getById(id){
@@ -68,8 +63,10 @@ async function update(id, userParam){
     userParam.hash = bcrypt.hashSync(userParam.password, 10);
   }
 
+  const updatedBooks = userParam.books;
+
   // copy userParam properties to user
-  Object.assign(user, userParam);
+  Object.assign(user, updatedBooks);
 
   await user.save();
 

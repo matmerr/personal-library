@@ -7,8 +7,7 @@ const router = express.Router();
 // routes
 router.post('/authenticate', authenticate);
 router.post('/register', register);
-router.get('/', getAll);
-router.get('/current', getCurrent);
+router.get('/current', getCurrent); // TODO: use / for getCurrent
 router.get('/:id', getById);
 router.put('/:id', update);
 router.delete('/:id', _delete);
@@ -28,12 +27,6 @@ function register(req, res, next){
   userService.create(req.body)
   .then(() => res.json({}))
   .catch(err => next(err));
-}
-
-function getAll(req, res, next) {
-  userService.getAll()
-      .then(users => res.json(users))
-      .catch(err => next(err));
 }
 
 function getCurrent(req, res, next) {

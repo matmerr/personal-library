@@ -1,15 +1,7 @@
 
 // encapsulates all backend api calls for performing operations on book data
-import { authHeader } from '../helpers/auth-header';
-
-const apiUrl = 'http://localhost:3001';
 const googleAPI = 'https://www.googleapis.com/books';
 const keyAPI = process.env.REACT_APP_GOOGLE_BOOKS_KEY;
-
-export const booksService = {
-  search,
-  addBook,
-};
 
 function handleResponse(response) {
   return response.text().then((text) => {
@@ -36,17 +28,11 @@ function search(searchTerm) {
     .then(handleResponse)
     .then((books) => {
       // login successful
-      localStorage.setItem('searchDisplay', JSON.stringify(books));
-      return books;
+      //localStorage.setItem('books.books', JSON.stringify(books));
+      return books.items;
     });
 }
 
-function addBook(user) {
-  const requestOptions = {
-    method: 'PUT',
-    headers: { ...authHeader(), 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
-  };
-
-  return fetch(`${apiUrl}/users/${user._id}`, requestOptions).then(handleResponse);
-}
+export const booksService = {
+  search,
+};

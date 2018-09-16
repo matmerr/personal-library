@@ -43,7 +43,7 @@ function Library(props) {
 class HomePage extends React.Component {
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(userActions.getAll());
+    // dispatch(userActions.getCurrent);
   }
 
   handleDeleteUser(id) {
@@ -71,27 +71,6 @@ class HomePage extends React.Component {
         </div>
 
         {user.books && <Library books={user.books} />}
-
-        <h3>All registered users:</h3>
-        {users.loading && <em>Loading users...</em>}
-        {users.items
-            && (
-            <ul>
-                {users.items.map((user) => {
-                return (
-                    <li key={user.id}>
-                    {`${user.firstName} ${user.lastName}`}
-                    {user.deleting ?
-                        <em> - Deleting...</em>
-                        : user.deleteError ?
-                        (<span className="error">{` - ERROR: ${user.deleteError}`}</span>)
-                        : (<span>{`  -  `}<a onClick={this.handleDeleteUser(user.id)}>Delete</a></span>)}
-                    </li>
-                );
-                })}
-            </ul>
-            )
-        }
       </div>
     );
   }

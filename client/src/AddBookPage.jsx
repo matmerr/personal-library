@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
@@ -33,12 +34,13 @@ class AddBookPage extends React.Component {
     const { searchTerms } = this.state;
     const { dispatch } = this.props;
     if (searchTerms !== '') {
-      dispatch(bookActions.search(searchTerms));
+      dispatch(bookActions.searchGoogleBooks(searchTerms));
     }
   }
 
   handleAddBook(bookID) {
     const { dispatch, user } = this.props;
+    console.log('current user: ', user);
     if (bookID) {
       const updatedUser = { ...user, books: [bookID] };
       dispatch(bookActions.addBook(updatedUser));
@@ -52,7 +54,7 @@ class AddBookPage extends React.Component {
   }
 
   render() {
-    const { searching, books } = this.props;
+    const { searching, items } = this.props;
     const { searchTerms } = this.state;
     return (
       <div>
@@ -72,7 +74,7 @@ class AddBookPage extends React.Component {
           <SearchIcon />
         </IconButton>
 
-        {books && books.items.map((book, i) => (
+        {items && items.map((book, i) => (
           <BookCard
             key={i}
             id={book.id}
@@ -89,15 +91,27 @@ class AddBookPage extends React.Component {
   }
 }
 
+AddBookPage.propTypes = {
+  searching: PropTypes.bool.isRequired,
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  user: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  dispatch: PropTypes.func.isRequired,
+};
+
 function mapStateToProps(state) {
   const { user } = state.authentication;
-  const { searching, books } = state.books;
+  const { searching, items } = state.books;
   return {
     searching,
-    books,
+    items,
     user,
   };
 }
 
-const connectedAddBookPage = connect(mapStateToProps)(withStyles(styles)(AddBookPage));
+const connectedAddBookPage = connect(
+  mapStateToProps,
+  null,
+)(withStyles(styles)(AddBookPage));
+
+// const connectedAddBookPage = connect(mapStateToProps)(withStyles(styles)(AddBookPage));
 export { connectedAddBookPage as AddBookPage };
