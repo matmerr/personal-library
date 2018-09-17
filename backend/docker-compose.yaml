@@ -1,0 +1,17 @@
+version: "3.3"
+services:
+  personal-libary-backend:
+    build: .
+    restart: always
+    ports: 
+      - "3001:3001"
+    environment:
+      - DB_URI_LOCAL=mongodb://mongodb_books:27017/books
+      - JWT_SECRET="testing_secret"
+      - API_PORT=3001
+
+  mongodb_books:
+    ports: 
+      - "27017"
+    image: mongo:latest
+    restart: always

@@ -1,0 +1,9 @@
+version: "3.3"
+services:
+  personal-libary-frontend:
+    build: .
+    restart: always
+    ports: 
+      - "80:80"
+    environment:
+      - REACT_APP_GOOGLE_BOOKS_KEY=KEY_HERE
