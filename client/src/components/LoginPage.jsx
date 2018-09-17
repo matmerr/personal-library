@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { userActions } from './actions/user.actions';
+import { userActions } from '../actions/user.actions';
 import MenuAppBar from './MenuAppBar';
 import BookIcon from './BooksIcon';
 

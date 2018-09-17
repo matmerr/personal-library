@@ -67,7 +67,7 @@ function update(user) {
     body: JSON.stringify(user),
   };
 
-  return fetch(`${apiUrl}/users/${user._id}`, requestOptions)
+  return fetch(`${apiUrl}/users/${user._id}`, requestOptions) // eslint-disable-line no-underscore-dangle
     .then(handleResponse)
     .then(() => {
       // update the user when successful
@@ -75,7 +75,7 @@ function update(user) {
     });
 }
 
-function _delete(id) {
+function _delete(id) { // eslint-disable-line no-underscore-dangle
   const requestOptions = {
     method: 'DELETE',
     headers: authHeader(),

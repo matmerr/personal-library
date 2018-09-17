@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import { userActions } from './actions/user.actions';
+import { userActions } from '../actions/user.actions';
 import MenuAppBar from './MenuAppBar';
 
 const styles = {
@@ -50,7 +50,7 @@ class HomePage extends React.Component {
     return (
       <div>
         <MenuAppBar />
-        <h1>{`Welcome ${user.firstName}!`}</h1>
+        <h1>{`Welcome to your virtual library, ${user.firstName}!`}</h1>
         <div className={classes.addBook}>
           <Button
             mini

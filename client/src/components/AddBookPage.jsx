@@ -6,8 +6,8 @@ import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { bookActions } from './actions/books.actions';
-import { userActions } from './actions/user.actions';
+import { bookActions } from '../actions/books.actions';
+import { userActions } from '../actions/user.actions';
 import BookCard from './BookCard';
 import MenuAppBar from './MenuAppBar';
 

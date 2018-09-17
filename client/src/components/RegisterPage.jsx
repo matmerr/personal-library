@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { userActions } from './actions/user.actions';
+import { userActions } from '../actions/user.actions';
 
 class RegisterPage extends React.Component {
   constructor(props) {

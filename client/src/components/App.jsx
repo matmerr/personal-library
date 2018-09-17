@@ -1,14 +1,14 @@
 import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import { MuiThemeProvider } from '@material-ui/core/styles';
-import { history } from './helpers/history';
-import { PrivateRoute } from './components/PrivateRoute';
+import { history } from '../helpers/history';
+import { PrivateRoute } from './PrivateRoute';
 import { HomePage } from './HomePage';
 import { LoginPage } from './LoginPage';
 import { RegisterPage } from './RegisterPage';
 import { AddBookPage } from './AddBookPage';
 import Container from './Container';
-import ApplicationTheme from './theme';
+import ApplicationTheme from '../theme';
 
 export default function App() {
   return (
